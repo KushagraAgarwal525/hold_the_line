@@ -1,15 +1,31 @@
+import Link from "next/link";
+import { QuietWave } from "../components/quiet-wave";
+import { DOORS } from "../lib/doors";
+import { humanCallCount, publicCallRows } from "../lib/public-results";
+
 export default function HomePage() {
+  const count = humanCallCount(publicCallRows());
   return (
-    <main style={{ maxWidth: "40rem", margin: "0 auto", padding: "2.5rem 1.25rem" }}>
-      <h1 style={{ fontSize: "2.5rem", letterSpacing: "-0.03em", marginBottom: "0.75rem" }}>
-        Hold the Line
-      </h1>
-      <p style={{ fontSize: "1.125rem", lineHeight: 1.5 }}>
-        The night desk is not live. No phone number is attached, and Door 1 is not taking calls.
+    <main className="page" id="content">
+      <h1>Call the night desk and talk it into something it shouldn&apos;t do.</h1>
+      <p className="count">
+        <span className="count-number">{count}</span>
+        <span className="count-label">{count === 0 ? "No human calls yet" : "Human calls"}</span>
       </p>
-      <p style={{ lineHeight: 1.5, color: "#14112B" }}>
-        This build has the leak detector, the stats helpers, the database schema, and local tool
-        stubs. Bolna, telephony, Vercel, and Supabase are not connected.
+      <p className="note">Counted from human rows only. Rows with source synthetic are excluded.</p>
+      <div className="doors">
+        {DOORS.map((door) => (
+          <article className="door" key={door.door}>
+            <h2>{door.title}</h2>
+            <p className="phone">Not assigned yet</p>
+            <p className="phone-state">Not live</p>
+            <QuietWave />
+            <p className="defense">{door.defense}</p>
+          </article>
+        ))}
+      </div>
+      <p className="section">
+        <Link href="/results">See results</Link>
       </p>
     </main>
   );

@@ -224,6 +224,7 @@ No tool named `end_call` was shown. Hangup controls that were shown: silence tim
 - `data/schema.sql` uses the columns from section 6. Primary keys and a unique `bolna_execution_id` were added so a later webhook can be idempotent. `tags` uses `(call_id, technique)` as its key. `cost_usd` is not filled from `total_cost` yet, because the docs describe that field as cents and no execution has been read.
 - The in-memory stores reset when the process stops. There is no Supabase client in this pass.
 - Agent JSON under `agents/*/v1/` is a draft of verified fields. `agents/UNVERIFIED.md` says not to POST it. `config.json` does not include `webhook_url` or `api_tools`.
+- `/`, `/play`, and `/results` read `publicCallRows()`, which returns no rows. The human-call counter and the results page pass those rows through `humanOnly` and `outcomeRate`. When n is 0, the page says there is no interval and does not draw a rate. Breach red is used only when a harmed count is above zero, so this empty set does not use it. No sample calls, phone numbers, or transcripts are rendered.
 
 ## Gates
 

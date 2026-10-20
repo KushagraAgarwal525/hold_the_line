@@ -1,0 +1,309 @@
+:root {
+  --paper: #f6f4fb;
+  --ink: #14112b;
+  --violet: #6a3df0;
+  --held: #0f8f7e;
+  --breached: #e5484d;
+  --quiet: #8c88a3;
+  --font-body: var(--font-bricolage), "Bricolage Grotesque", sans-serif;
+  --font-mono: var(--font-plex), "IBM Plex Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+}
+
+.transcript {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+}
+
+a {
+  color: var(--violet);
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0.4rem 0.6rem;
+}
+
+.skip:focus {
+  top: 1rem;
+  z-index: 2;
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem 1.25rem;
+  padding: 1.25rem 1.25rem 0;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.wordmark {
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.nav a {
+  color: var(--ink);
+}
+
+.nav a[aria-current="page"] {
+  color: var(--violet);
+}
+
+.page {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+.copy {
+  max-width: 66ch;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 7vw, 4.6rem);
+  font-weight: 560;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  max-width: 14ch;
+  margin-bottom: 1.25rem;
+}
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 0.4rem;
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin: 2rem 0 0.4rem;
+}
+
+.count-number {
+  font-size: clamp(4.5rem, 16vw, 8rem);
+  font-weight: 560;
+  letter-spacing: -0.055em;
+  line-height: 0.85;
+}
+
+.count-label,
+.phone-state,
+.version {
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.note {
+  max-width: 66ch;
+  margin-bottom: 2.5rem;
+}
+
+.doors,
+.rates {
+  display: grid;
+  gap: 2.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.door,
+.rate {
+  border-top: 1px solid var(--quiet);
+  padding-top: 1rem;
+}
+
+.phone {
+  font-size: clamp(2.15rem, 7vw, 2.75rem);
+  font-weight: 560;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin: 0.35rem 0;
+  text-wrap: balance;
+}
+
+.wave {
+  display: block;
+  width: 7.5rem;
+  height: 1.5rem;
+  margin: 0.35rem 0 0.8rem;
+}
+
+.wave path {
+  fill: none;
+  stroke: var(--quiet);
+  stroke-width: 1.5;
+}
+
+.defense {
+  max-width: 36ch;
+  margin-bottom: 0;
+}
+
+.section {
+  margin-top: 2.75rem;
+}
+
+.section p,
+.section li {
+  max-width: 66ch;
+}
+
+.claim-form {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 28rem;
+  margin-top: 1rem;
+}
+
+.claim-form label {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.claim-form input,
+.claim-form button {
+  font: inherit;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--quiet);
+  border-radius: 0;
+  padding: 0.7rem 0.75rem;
+}
+
+.claim-form button:disabled,
+.claim-form input:disabled {
+  opacity: 1;
+}
+
+.pair {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.pair dt {
+  font-weight: 560;
+}
+
+.pair dd {
+  margin: 0.15rem 0 0;
+  max-width: 40ch;
+}
+
+.tone-violet {
+  color: var(--violet);
+}
+
+.tone-breached {
+  color: var(--breached);
+}
+
+.bar-track {
+  height: 2px;
+  background: var(--quiet);
+  margin-top: 0.55rem;
+}
+
+.bar-fill {
+  height: 2px;
+  background: var(--ink);
+}
+
+.bar-fill.tone-violet {
+  background: var(--violet);
+}
+
+.bar-fill.tone-breached {
+  background: var(--breached);
+}
+
+@media (min-width: 900px) {
+  .doors,
+  .rates {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .page {
+    padding-top: 2rem;
+  }
+
+  .phone {
+    font-size: clamp(1.85rem, 2.2vw, 2.35rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

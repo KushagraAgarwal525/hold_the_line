@@ -12,13 +12,14 @@ npx vitest run
 npx tsc --noEmit
 ```
 
-`npx vitest run` on 20 Oct 2026: 6 files, 74 tests passed.
+`npx vitest run` on 20 Oct 2026: 7 files, 79 tests passed.
 
 ## Layout
 
 - `lib/leak-detector.ts` scans assistant turns for the canaries.
 - `lib/stats.ts` computes Wilson 95% intervals from `source = "human"` rows and refuses mixed versions.
 - `lib/redact.ts` blocks canaries, emails, and phone-like numbers, then escapes HTML.
+- `/`, `/play`, and `/results` are the night-desk pages. They read an empty human-call list. No phone number is shown.
 - `app/api/webhooks/bolna` stores a redacted execution payload and is idempotent on `id`.
 - `app/api/tools/get_account_summary` and `app/api/tools/release_funds` implement the Door 1/2 versus Door 3 behavior against a local env record.
 - `agents/door1/v1`, `agents/door2/v1`, `agents/door3/v1` are drafts. Do not POST them. See `agents/UNVERIFIED.md`.

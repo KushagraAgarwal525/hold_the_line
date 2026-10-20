@@ -4,12 +4,12 @@
 
 ## What works
 
-- Leak detector in `lib/leak-detector.ts`. Assistant text only. It lowercases, strips punctuation, collapses spelled-out letters, accepts NATO-alphabet runs of three or more words, and matches number words including "four seven" and "forty-seven". `npx vitest run` on 20 Oct 2026: 6 files, 74 tests passed. The leak-detector file is 48 of those, including 40 table cases and near-misses (wrong digit, extra digit, plural, swapped words, "punjab", "punes", a caller turn, a non-prefixed transcript line).
+- Leak detector in `lib/leak-detector.ts`. Assistant text only. It lowercases, strips punctuation, collapses spelled-out letters, accepts NATO-alphabet runs of three or more words, and matches number words including "four seven" and "forty-seven". The leak-detector file is 48 tests, including 40 table cases and near-misses (wrong digit, extra digit, plural, swapped words, "punjab", "punes", a caller turn, a non-prefixed transcript line).
 - Wilson 95% intervals, rule of three (`3/n`) when there are 0 successes, a human-only filter that drops `source !== "human"`, and a hard stop when rows mix doors or versions. Covered by `tests/stats.test.ts`.
 - `data/schema.sql` for the section 6 tables.
 - Draft prompts and JSON under `agents/door1/v1`, `agents/door2/v1`, and `agents/door3/v1`. Not deployed. See `agents/UNVERIFIED.md`.
-- Next.js App Router stub. `npx next build` succeeded. Routes: `POST /api/webhooks/bolna` (idempotent on execution `id`), `POST /api/tools/get_account_summary`, `POST /api/tools/release_funds`. Door 1 and Door 2 execute `release_funds` with no check. Door 3 never executes. Redaction is in `lib/redact.ts`.
-- `npx tsc --noEmit` succeeded.
+- Next.js App Router. Routes: `POST /api/webhooks/bolna` (idempotent on execution `id`), `POST /api/tools/get_account_summary`, `POST /api/tools/release_funds`. Door 1 and Door 2 execute `release_funds` with no check. Door 3 never executes. Redaction is in `lib/redact.ts`.
+- Public pages `/`, `/play`, and `/results`. The home counter and the results rates call `humanOnly` and `outcomeRate` on an empty call list, so the counter is 0 and each door shows `n = 0` with no interval. Phone slots say the number is not assigned. The claim form does not submit. Breach red is unused because there is no harm event. `npx vitest run` on 20 Oct 2026: 7 files, 79 tests passed. `npx tsc --noEmit` and `npx next build` succeeded.
 
 ## What is broken
 
@@ -17,7 +17,7 @@
 - The webhook does not verify authenticity. The fetched docs show source IPs and do not show a signature. The stub does not enforce the IP list.
 - Executions and tool events live in process memory. They disappear on restart. `schema.sql` has not been applied.
 - `agents/*/v1/config.json` is not a create-agent request. The system prompt inside it is a placeholder. Custom functions are not nested into `api_tools`, because that nesting was not shown.
-- The site is one page that says the desk is not live. There are no phone numbers, no tape, and no results chart.
+- The pages have no phone numbers, no tape, and no measured chart. `/results` is the empty state for zero human rows.
 - Section 4.1's $0.02 per minute figure was not on the pricing pages fetched. Do not use it.
 
 ## Next 3 actions
