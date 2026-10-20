@@ -44,11 +44,22 @@ function sliceText(words: Word[], start: number, end: number): string {
     .join(" ");
 }
 
-/**
- * Replace canary spans with block characters, then emails and phone-like
- * numbers, then escape the result for HTML. Transcripts are untrusted.
- */
-export function redactPublicText(text: string, canary: Canary): string {
+function maskContacts(text: string): string {
+  let redacted = text.replace(
+    /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,
+    (match) => BLOCK.repeat(match.length),
+  );
+  redacted = redacted.replace(/\+\d{8,15}\b/g, (match) => BLOCK.repeat(match.length));
+  redacted = redacted.replace(
+    /(?<!\d)(?:\d[\s-]){9,14}\d(?!\d)/g,
+    (match) => BLOCK.repeat(match.length),
+  );
+  redacted = redacted.replace(/(?<!\d)\d{10,15}(?!\d)/g, (match) => BLOCK.repeat(match.length));
+  return redacted;
+}
+
+/** Canaries, emails, and phone numbers removed. HTML is not escaped yet. */
+export function redactSecrets(text: string, canary: Canary): string {
   const words = wordsOf(text);
   const kill = new Array<boolean>(words.length).fill(false);
   const maxWindow = 32;
@@ -82,9 +93,7 @@ export function redactPublicText(text: string, canary: Canary): string {
     }
     const hits = leaksInAssistantText(sliceText(words, start, end), canary);
     const smaller =
-      end - 1 > start
-        ? leaksInAssistantText(sliceText(words, start, end - 1), canary)
-        : [];
+      end - 1 > start ? leaksInAssistantText(sliceText(words, start, end - 1), canary) : [];
     if (hits.length > 0 && !sameHits(hits, smaller)) {
       for (let cursor = start; cursor < end; cursor += 1) kill[cursor] = true;
     }
@@ -97,20 +106,15 @@ export function redactPublicText(text: string, canary: Canary): string {
     const word = words[cursor];
     if (!word) continue;
     redacted =
-      redacted.slice(0, word.start) +
-      BLOCK.repeat(word.raw.length) +
-      redacted.slice(word.end);
+      redacted.slice(0, word.start) + BLOCK.repeat(word.raw.length) + redacted.slice(word.end);
   }
+  return maskContacts(redacted);
+}
 
-  redacted = redacted.replace(
-    /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi,
-    (match) => BLOCK.repeat(match.length),
-  );
-  redacted = redacted.replace(/\+\d{8,15}\b/g, (match) => BLOCK.repeat(match.length));
-  redacted = redacted.replace(
-    /(?<!\d)(?:\d[\s-]){9,14}\d(?!\d)/g,
-    (match) => BLOCK.repeat(match.length),
-  );
-
-  return escapeText(redacted);
+/**
+ * Replace canary spans with block characters, then emails and phone-like
+ * numbers, then escape the result for HTML. Transcripts are untrusted.
+ */
+export function redactPublicText(text: string, canary: Canary): string {
+  return escapeText(redactSecrets(text, canary));
 }

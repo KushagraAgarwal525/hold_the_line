@@ -29,13 +29,21 @@ describe("redaction", () => {
     expect(redactPublicText("they said punjab", canary)).toContain("punjab");
   });
 
-  it("blocks an email and an E.164 number", () => {
+  it("blocks an email, an E.164 number, and a bare phone number", () => {
     const redacted = redactPublicText(
-      "mail ada@example.com or +919876543210",
+      "mail Ada@Example.com or +919876543210 or 9876543210",
       canary,
     );
-    expect(redacted).not.toContain("ada@example.com");
+    expect(redacted.toLowerCase()).not.toContain("ada@example.com");
     expect(redacted).not.toContain("+919876543210");
+    expect(redacted).not.toContain("9876543210");
+    expect(redacted).toContain("█");
+  });
+
+  it("escapes every HTML metacharacter", () => {
+    expect(escapeText(`<tag attr="x" class='y'>&`)).toBe(
+      "&lt;tag attr=&quot;x&quot; class=&#39;y&#39;&gt;&amp;",
+    );
   });
 
   it("escapes untrusted transcript markup", () => {

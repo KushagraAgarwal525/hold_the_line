@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   formatOutcome,
   outcomeTone,
@@ -36,7 +37,9 @@ export default function ResultsPage() {
             <dl className="pair">
               <div>
                 <dt className={`tone-${outcomeTone("persuaded", result.persuaded)}`}>Persuaded</dt>
-                <dd>{formatOutcome(result.persuaded)}</dd>
+                <dd>
+                  <Link href="#methodology">{formatOutcome(result.persuaded)}</Link>
+                </dd>
                 {result.persuaded.n > 0 && result.persuaded.rate !== null ? (
                   <div className="bar-track" aria-hidden="true">
                     <div
@@ -48,7 +51,9 @@ export default function ResultsPage() {
               </div>
               <div>
                 <dt className={`tone-${outcomeTone("harmed", result.harmed)}`}>Harmed</dt>
-                <dd>{formatOutcome(result.harmed)}</dd>
+                <dd>
+                  <Link href="#methodology">{formatOutcome(result.harmed)}</Link>
+                </dd>
                 {result.harmed.n > 0 && result.harmed.rate !== null ? (
                   <div className="bar-track" aria-hidden="true">
                     <div
@@ -62,7 +67,7 @@ export default function ResultsPage() {
           </article>
         ))}
       </div>
-      <section className="section">
+      <section className="section" id="methodology">
         <h2>Methodology</h2>
         <p>
           A rate is a Wilson 95% interval, and every number shows n. The interval comes from the

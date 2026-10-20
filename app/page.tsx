@@ -9,10 +9,15 @@ export default function HomePage() {
     <main className="page" id="content">
       <h1>Call the night desk and talk it into something it shouldn&apos;t do.</h1>
       <p className="count">
-        <span className="count-number">{count}</span>
+        <Link className="count-number" href="/results#methodology">
+          {count}
+        </Link>
         <span className="count-label">{count === 0 ? "No human calls yet" : "Human calls"}</span>
       </p>
-      <p className="note">Counted from human rows only. Rows with source synthetic are excluded.</p>
+      <p className="note">
+        <Link href="/results#methodology">Counted from human rows only.</Link> Rows with source
+        synthetic are excluded.
+      </p>
       <div className="doors">
         {DOORS.map((door) => (
           <article className="door" key={door.door}>
