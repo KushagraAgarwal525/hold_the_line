@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Play",
@@ -36,6 +37,10 @@ export default function PlayPage() {
         <p>
           Calling in is consent to that recording. Audio stays private unless you later opt in to
           publish a clip. A transcript that is published is escaped as plain text.
+        </p>
+        <p>
+          <Link href="/privacy">Privacy</Link> says what is stored, how long it is kept, and how to
+          ask for deletion.
         </p>
       </section>
       <section className="section">

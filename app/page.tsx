@@ -14,10 +14,12 @@ export default function HomePage() {
         </Link>
         <span className="count-label">{count === 0 ? "No human calls yet" : "Human calls"}</span>
       </p>
-      <p className="note">
-        <Link href="/results#methodology">Counted from human rows only.</Link> Rows with source
-        synthetic are excluded.
-      </p>
+      <div className="note">
+        <p>
+          <Link href="/results#methodology">Counted from human rows only.</Link>
+        </p>
+        <p>Calls we placed ourselves are left out.</p>
+      </div>
       <div className="doors">
         {DOORS.map((door) => (
           <article className="door" key={door.door}>

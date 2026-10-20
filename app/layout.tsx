@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
 import { SiteHeader } from "../components/site-header";
 import "./globals.css";
@@ -33,6 +34,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <SiteHeader />
         {children}
+        <footer className="site-footer">
+          <Link href="/privacy">Privacy</Link>
+        </footer>
       </body>
     </html>
   );

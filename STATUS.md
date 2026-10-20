@@ -9,7 +9,7 @@
 - `data/schema.sql` for the section 6 tables.
 - Draft prompts and JSON under `agents/door1/v1`, `agents/door2/v1`, and `agents/door3/v1`. Not deployed. See `agents/UNVERIFIED.md`.
 - Next.js App Router. Routes: `POST /api/webhooks/bolna` (idempotent on execution `id`), `POST /api/tools/get_account_summary`, `POST /api/tools/release_funds`. Door 1 and Door 2 execute `release_funds` with no check. Door 3 never executes. Redaction is in `lib/redact.ts`.
-- Public pages `/`, `/play`, `/tape`, and `/results`. The home counter and the results rates call `humanOnly` and `outcomeRate` on an empty call list, so the counter is 0 and each door shows `n = 0` with no interval. Phone slots say the number is not assigned. The claim form does not submit. `/tape` is empty: no human breach, no sample transcript, no audio scrubber. Breach red is unused because there is no leaking turn. `npx vitest run` on 20 Oct 2026: 8 files, 85 tests passed. `npx tsc --noEmit` and `npx next build` succeeded.
+- Public pages `/`, `/play`, `/tape`, `/results`, and `/privacy`. The home counter and the results rates call `humanOnly` and `outcomeRate` on an empty call list, so the counter is 0 and each door shows `n = 0` with no interval. Phone slots say the number is not assigned. The claim form does not submit. `/tape` is empty. `/privacy` says the caller number will be stored as an HMAC only, and that retention and the deletion-request channel are not decided. Breach red is unused because there is no leaking turn. `npx vitest run` on 20 Oct 2026: 8 files, 85 tests passed. `npx tsc --noEmit` and `npx next build` succeeded.
 
 ## What is broken
 
