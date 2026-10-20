@@ -8,8 +8,7 @@ export function TapeList({ entries }: { entries: TapeEntry[] }) {
   if (entries.length === 0) {
     return (
       <p className="copy">
-        No human breach is stored. Harmed human calls will show here, newest first. Rows with
-        source synthetic are excluded. A recording is shown only after the caller opts in.
+        No human breach is stored. Harmed human calls will show here, newest first. Calls we placed ourselves are left out. A recording is shown only after the caller opts in.
       </p>
     );
   }

@@ -30,6 +30,8 @@ describe("tape", () => {
     expect(tapeEntries(publicTapeCalls(), canary)).toEqual([]);
     const html = renderToStaticMarkup(<TapeList entries={[]} />);
     expect(html).toContain("No human breach is stored");
+    expect(html).toContain("Calls we placed ourselves are left out.");
+    expect(html).not.toContain("source synthetic");
     expect(html).not.toContain("tone-breached");
     expect(html).not.toContain("<audio");
   });

@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
+import { NightBanner } from "../components/night-banner";
 import { SiteHeader } from "../components/site-header";
+import { readClosedForTheNight } from "../lib/night-closure";
 import "./globals.css";
+
+export const dynamic = "force-dynamic";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -33,9 +37,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <SiteHeader />
+        <NightBanner closed={readClosedForTheNight()} />
         {children}
         <footer className="site-footer">
           <Link href="/privacy">Privacy</Link>
+          <Link href="/admin">Admin</Link>
         </footer>
       </body>
     </html>

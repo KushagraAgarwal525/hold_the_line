@@ -364,12 +364,23 @@ audio {
   max-width: 72rem;
   margin: 0 auto;
   padding: 0 1.25rem 2.5rem;
+  display: flex;
+  gap: 1.25rem;
 }
 
 .site-footer a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
+}
+
+.night-banner {
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  color: var(--ink);
+  background: var(--paper);
+  border-bottom: 3px solid var(--violet);
+  font-weight: 560;
 }
 
 @media (max-width: 520px) {
