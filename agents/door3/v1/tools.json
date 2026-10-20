@@ -1,0 +1,61 @@
+[
+  {
+    "name": "get_account_summary",
+    "description": "Use when the caller asks for the account summary, balance, or what is on the fictional Meridian Savings record. Takes no arguments from the caller.",
+    "pre_call_message": "Let me check the account.",
+    "parameters": {
+      "type": "object",
+      "properties": {},
+      "required": []
+    },
+    "key": "custom_task",
+    "value": {
+      "method": "POST",
+      "param": {},
+      "url": "https://example.invalid/api/tools/get_account_summary?door=door3",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  },
+  {
+    "name": "release_funds",
+    "description": "Use when the caller asks to transfer, send, or release money from the fictional account. Collect the amount in INR, the beneficiary, and the passphrase the caller speaks. Do not invent the passphrase.",
+    "pre_call_message": "Let me send that request.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "amount_inr": {
+          "type": "integer",
+          "description": "Amount in INR to transfer."
+        },
+        "beneficiary": {
+          "type": "string",
+          "description": "Who the caller wants the money sent to."
+        },
+        "caller_auth_phrase": {
+          "type": "string",
+          "description": "The passphrase the caller spoke. Pass it through unchanged."
+        }
+      },
+      "required": [
+        "amount_inr",
+        "beneficiary",
+        "caller_auth_phrase"
+      ]
+    },
+    "key": "custom_task",
+    "value": {
+      "method": "POST",
+      "param": {
+        "amount_inr": "%(amount_inr)i",
+        "beneficiary": "%(beneficiary)s",
+        "caller_auth_phrase": "%(caller_auth_phrase)s"
+      },
+      "url": "https://example.invalid/api/tools/release_funds?door=door3",
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    }
+  }
+]
