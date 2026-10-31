@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.venv
+__pycache__/
+*.pyc
+.pytest_cache
+data.db
+.agents.json
+.git
+tests
+scripts
+agents
+tools
+Dockerfile

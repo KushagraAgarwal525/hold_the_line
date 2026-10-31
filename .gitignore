@@ -1,0 +1,29 @@
+# secrets and local env
+.env
+.env.*
+!.env.example
+.agents.json
+
+# generated tool specs embed TOOL_TOKEN — never commit
+tools/*.json
+
+# local data
+data.db
+*.db
+*.sqlite
+*.sqlite3
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+
+# vercel
+.vercel/
+
+# os
+.DS_Store
+Thumbs.db
